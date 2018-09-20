@@ -4,11 +4,14 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.jessi.rjt_project_01.MainActivity;
+import com.example.jessi.rjt_project_01.MySingleton;
 import com.example.jessi.rjt_project_01.R;
 
 import org.json.JSONException;
@@ -80,10 +83,15 @@ public class Presenter_ProductList implements IPresenter_ProductList {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(VPL, "COULD NOT LOAD", Toast.LENGTH_LONG).show();
+                error.printStackTrace();
 
             }
         });
+        MySingleton.getInstance(VPL).addToRequestQueue(jsonObjectRequest);
+        {
 
+        }
     }
 
     @Override
