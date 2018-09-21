@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jessi.rjt_project_01.R;
+import com.example.jessi.rjt_project_01.data.models.Model_Product;
 
 public class View_ProductList extends AppCompatActivity implements IView_ProductList{
 
@@ -39,9 +39,9 @@ public class View_ProductList extends AppCompatActivity implements IView_Product
         iPresenter_productList.iPresenter_VolleyItemRequest();
 
 
-        mProd = iPresenter_productList.getProduct();
+       // mProd = iPresenter_productList.getProduct();
 
-        ID.setText(mProd.getId());
+        //ID.setText(mProd.getId());
         //ID.setText("POP");
 //        Name.setText(mProd.getName());
 //        Description.setText(mProd.getDescription());

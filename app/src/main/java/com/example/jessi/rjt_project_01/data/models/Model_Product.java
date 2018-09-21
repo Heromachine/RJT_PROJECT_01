@@ -1,6 +1,11 @@
-package com.example.jessi.rjt_project_01.ui.main.uiproductlist;
+package com.example.jessi.rjt_project_01.data.models;
 
 public class Model_Product {
+
+    private String id;
+    private String name;
+    private String description;
+    private String url;
 
     public Model_Product()
     {
@@ -44,12 +49,4 @@ public class Model_Product {
     public void setUrl(String url) {
         this.url = url;
     }
-
-    private String id;
-    private String name;
-    private String description;
-    private String url;
-
-
-
 }

@@ -10,7 +10,7 @@ public class DBHelper implements IDBHelper {
 
     @Override
     public void readRow(IDataManager.OnResponseListener listener) {
-        listener.getTodoNote("DBHELPER ");
+
     }
 
     @Override
@@ -20,6 +20,9 @@ public class DBHelper implements IDBHelper {
 
     @Override
     public void deleteRow() {
+//        String selection = ToDoContract.ToDoEntery.TITLE +" LIKE?";
+//        String[] selectionArgs = {"hello"};
+//        listener.getTodoNote("DBHELPER ");
 
     }
 }
