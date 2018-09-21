@@ -1,10 +1,15 @@
 package com.example.jessi.rjt_project_01.data.models;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.NetworkImageView;
+import com.example.jessi.rjt_project_01.R;
 
 import java.util.List;
 
@@ -20,6 +25,8 @@ public class CustomProductlistAdapter extends BaseAdapter {
         this.activity = activity;
         this.list_Modle_Product = Model_Product;
     }
+
+    //RETURNS THE SIZE OF MY LIST
     @Override
     public int getCount() {
         return list_Modle_Product.size();
@@ -35,12 +42,17 @@ public class CustomProductlistAdapter extends BaseAdapter {
         return position;
     }
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         return null;
     }
 
+
+//    @Override
+//    public View getView(int position, View convertView, ViewGroup parent) {
+//        return null;
+//    }
+//
 //    @Override
 //    public View getView(int position, View convertView, ViewGroup parent) {
 //
@@ -60,7 +72,7 @@ public class CustomProductlistAdapter extends BaseAdapter {
 //                .findViewById(R.id.thumbnail);
 //
 //        // getting model data for the row
-//        Model m = modelItems.get(position);
+//        Model_Product m = modelItems.get(position);
 //
 //        // title
 //        title.setText("Title: " + String.valueOf(m.getTitle()));

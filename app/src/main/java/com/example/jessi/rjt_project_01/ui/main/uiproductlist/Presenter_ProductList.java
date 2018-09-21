@@ -26,37 +26,39 @@ import java.util.List;
 
 public class Presenter_ProductList implements IPresenter_ProductList {
     private static final String TAG = "PRESENTERPRO";
-    
-    RecyclerView recyclerView;
-    RecyclerView.Adapter recyclerAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    private ListView listView;
-    CustomProductlistAdapter CPLA;
 
-
-
-    View_ProductList VPL;
-    IView_ProductList IVPL;
-    Context cntx;
-
-    String productURL = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key=ac56d9b1f49a843b9be57f8d2796ea35&user_id=1389";
-
+    //STRING USED TO TEST IF DATA CAME FROM SERVER *NOT USEFUL
     String ID ;
     String Name;
     String Description;
     String ImageUrl;
 
-    Model_Product product;
+    //RECYCLER
+    RecyclerView recyclerView;
+    RecyclerView.Adapter recyclerAdapter;
+    RecyclerView.LayoutManager layoutManager;
 
+    //VIEW RESOURCES
+    private View_ProductList VPL;
+    private IView_ProductList IVPL;
+    private Context cntx;
+
+    //TEM STRING FOR URL, MUST MAKE DYNAMIC LATER
+    private String productURL = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key=ac56d9b1f49a843b9be57f8d2796ea35&user_id=1389";
+
+    //MODEL RESOURCES
+    private Model_Product product;
+    private ListView listView;
+    private CustomProductlistAdapter CPLA;
     private List listModel_Product;
 
+    //INIT THIS PRESENTER WITH
     public Presenter_ProductList(View_ProductList mainActivity)
     {
         VPL = mainActivity;
         IVPL = mainActivity;
         CPLA = new CustomProductlistAdapter(VPL, listModel_Product);
-        listView = (ListView)  VPL.findViewById(R.id.tv_product_description )
-
+        listView = (ListView)  VPL.findViewById(R.id.tv_product_description );
     }
 
     @Override
@@ -72,7 +74,7 @@ public class Presenter_ProductList implements IPresenter_ProductList {
     @Override
     public void iPresenter_VolleyItemRequest() {
 
-        Log.d(TAG, "iPresenter_VolleyItemRequest: \n\n\n=====================================================================ENTER");
+        //REQUEST FROM ONLINE FIRST OBJECT(JSONOBJECT )
         final JsonObjectRequest jsonObjectRequest= new JsonObjectRequest(
                 Request.Method.GET,
                 productURL,
@@ -80,20 +82,25 @@ public class Presenter_ProductList implements IPresenter_ProductList {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
                         try {
+                            //REQUEST AN ARRAY FROM THE FIRST JSON OBJECT(response) CALLED catagory
                             JSONArray catagory = response.getJSONArray("catagory");
 
+                            //ITERATE THROUGH THE ARRAY catagory
                             for(int i = 0; i < catagory.length(); i++)
                             {
+                                //CREATE JSON OBJECT (catObject) AND PLACE ONE OBJECT FROM catagory
                                 JSONObject catObject = catagory.getJSONObject(i);
 
+                                //CREATE MODEL(modelp)
                                 Model_Product modelp = new Model_Product();
+                                //PLACE ALL ITEMS IN catObject into MODEL
                                 modelp.setId(catObject.getString("cid"));
                                 modelp.setName(catObject.getString("cname"));
                                 modelp.setDescription(catObject.getString("cdiscription"));
                                 modelp.setUrl(catObject.getString("cimagerl"));
 
+                                //ADD MODEL(modelp) INTO A LIST
                                 listModel_Product.add(modelp);
                             }
                         } catch (JSONException e) {
@@ -109,6 +116,10 @@ public class Presenter_ProductList implements IPresenter_ProductList {
                 error.printStackTrace();
             }
         });
+
+
+
+
     }
 
     @Override
