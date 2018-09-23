@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
-import com.example.jessi.rjt_project_01.R;
+//import com.example.jessi.rjt_project_01.R;
 
 import java.util.List;
 

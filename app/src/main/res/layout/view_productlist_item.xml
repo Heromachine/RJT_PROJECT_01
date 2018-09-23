@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/img_item"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"/>
+
+
+            <TextView
+                android:id="@+id/tv_item_id"
+                android:layout_width="125dp"
+                android:layout_height="35dp"
+                android:text="Price: "
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                android:layout_width="218dp"
+                android:layout_height="34dp"
+                android:padding="@dimen/cardview_default_radius"
+                android:text="Item: " />
+
+            <TextView
+                android:id="@+id/tv_item_description"
+                android:layout_width="362dp"
+                android:layout_height="91dp"
+                android:text="Descrition: " />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,7 +1,9 @@
 package com.example.jessi.rjt_project_01.data.models;
 
-public class Model_Product {
+import android.util.Log;
 
+public class Model_Product {
+    private static final String TAG = "Model_Product";
     private String id;
     private String name;
     private String description;
@@ -12,6 +14,8 @@ public class Model_Product {
 
     }
     public Model_Product(String id, String name, String description, String url) {
+        Log.d(TAG, "Model_Product: =============================NEW MODEL CALL");
+
         this.id = id;
         this.name = name;
         this.description = description;
