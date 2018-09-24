@@ -26,21 +26,29 @@
         </activity
         -->
 
-        <activity
-            android:name=".ui.main.uiproductlist.View_ProductList"
+
+        <!-- SIGNUP ACTIVITY-->
+        <activity android:name=".ui.main.uisignup.View_SignUp">
+
+        </activity>
+
+        <!-- LOGIN ACTIVITY-->
+        <activity android:name=".ui.main.uilogin.View_Login"
+
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.main.uilogin.View_Login" />
-        <activity android:name=".ui.main.uisignup.View_SignUp" />
-        <!-- activity android:name=".ui.main.uiproductlist.View_ProductList"></activity -->
+            </intent-filter>></activity>
 
+        <!-- PRODUCT LIST ACTIVITY-->
+        <activity android:name=".ui.main.uiproductlist.View_MainActivity_ProductList" ></activity>
+
+        <!-- CATEGORIES ACTIVITY-->
         <activity android:name=".ui.main.uicategories.View_Categories"></activity>
+
     </application>
 
 </manifest>

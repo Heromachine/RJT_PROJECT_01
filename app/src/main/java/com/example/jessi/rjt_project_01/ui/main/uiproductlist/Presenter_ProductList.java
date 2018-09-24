@@ -1,23 +1,15 @@
 package com.example.jessi.rjt_project_01.ui.main.uiproductlist;
 
 import android.content.Context;
-import android.graphics.ColorSpace;
-import android.icu.text.UnicodeSetSpanner;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.example.jessi.rjt_project_01.AppController;
-import com.example.jessi.rjt_project_01.R;
 import com.example.jessi.rjt_project_01.data.models.CustomProductlistAdapter;
 import com.example.jessi.rjt_project_01.data.models.Model_Product;
 
@@ -32,7 +24,7 @@ public class Presenter_ProductList implements IPresenter_ProductList {
     private static final String TAG = "PRESENTERPRO";
 
     //VIEW RESOURCES
-    private View_ProductList VPL;
+    private View_MainActivity_ProductList VPL;
 
     //TEM STRING FOR URL, MUST MAKE DYNAMIC LATER
     private String productURL = "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key=ac56d9b1f49a843b9be57f8d2796ea35&user_id=1389";
@@ -41,30 +33,35 @@ public class Presenter_ProductList implements IPresenter_ProductList {
      /////////////////////////////////////
     RecyclerView recyclerView;
     private CustomProductlistAdapter CPLA;
-    private ListViewAdapter LVA;
+    private RecycleView_Adapter_Product LVA;
     private List <Model_Product> listModel_Product;
     ///////////////////////////////////////
 
     //INIT THIS PRESENTER WITH----------------------------------------------------------------------
-    public Presenter_ProductList(View_ProductList mainActivity)
+    public Presenter_ProductList(View_MainActivity_ProductList mainActivity)
     {
+        VPL = mainActivity;
         Log.d(TAG, "iPresenter_VolleyItemRequest: ===================================================");
-        listModel_Product = new ArrayList<>();
+
         iPresenter_VolleyItemRequest();
     }
 
     @Override
     public void iPresenter_OnButtonClicked(View view, Context context) {
+        Log.d(TAG, "iPresenter_OnButtonClicked: ");
         switch(view.getId()) {
         }
     }
 
     @Override
     public void iPresenter_giveViewEditTextString(View view) {
+        Log.d(TAG, "iPresenter_giveViewEditTextString: ");
     }
 
     @Override
     public void iPresenter_VolleyItemRequest() {
+
+        listModel_Product = new ArrayList<>();
         Log.d(TAG, "iPresenter_VolleyItemRequest: ");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -88,6 +85,7 @@ public class Presenter_ProductList implements IPresenter_ProductList {
 
                                 //ADD MODEL(modelp) INTO A LIST
                                 listModel_Product.add(modelp);
+                                Log.d(TAG, "===========================================================getListModel_Product: "+ listModel_Product.size());
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -104,11 +102,13 @@ public class Presenter_ProductList implements IPresenter_ProductList {
 
 
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
+        Log.d(TAG, "===========================================================getListModel_Product: "+ listModel_Product.size());
     }
 
     @Override
     public List<Model_Product> getListModel_Product()
     {
+
         return listModel_Product;
     }
     @Override
