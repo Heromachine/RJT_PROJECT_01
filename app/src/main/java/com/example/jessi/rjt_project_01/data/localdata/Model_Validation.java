@@ -1,13 +1,20 @@
 package com.example.jessi.rjt_project_01.data.localdata;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Model_Validation {
-    public Model_Validation() {
 
+    private static final String TAG = "Model_ValSTARTED";
+//--------------------------------------------------------------------------------------------------
+
+    public Model_Validation() {
     }
-    private static final String TAG = "|===========InputValidation: ";
+
+//--------------------------------------------------------------------------------------------------
+
     boolean match = false;
     private Pattern pattern;
 
@@ -16,39 +23,45 @@ public class Model_Validation {
     ArrayList<String> TextViewStrings;
     ArrayList<Boolean> FieldResults;
 
+    String errormsg;
+
     int index = 0;
 
+//--------------------------------------------------------------------------------------------------
     public Model_Validation(final ArrayList<String> patterns, ArrayList<String> fieldnames)
     {
+        Log.d(TAG, "Model_Validation: STARTED");
+
         PatternStrings = patterns;
         TextViewStrings = new ArrayList<>();
         FieldNamesStrings = new ArrayList<>();
+        FieldResults = new ArrayList<>();
         for (int i = 0; i < PatternStrings.size(); i++)
         {
-            TextViewStrings.add("");
             FieldNamesStrings.add(fieldnames.get(i));
         }
     }
+//--------------------------------------------------------------------------------------------------
 
 //    private static final String USERNAME_PATTERN = "^[ A-Za-z0-9._-]{3,15}$";
 //    private static final String PASSWORD_PATTERN = "^[A-Za-z0-9.-_!]{6,18}$";
 //    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._-]{3,20}@[a-zA-Z0-9]{3,9}.com$";
 //    private static final String DOB_PATTERN = "^(\\d{2}-?\\d{2}-?\\d{4})$";
-
-
-
+//--------------------------------------------------------------------------------------------------
     public void addPatternString(final String input)
     {
         PatternStrings.add(input);
     }
-
+//--------------------------------------------------------------------------------------------------
     public void addTextViewString(String input)
     {
         TextViewStrings.add(input);
     }
+//--------------------------------------------------------------------------------------------------
 
-    public boolean validation(String Error)
+    public boolean validation()
     {
+        Log.d(TAG, "validation: STARTED");
         boolean isVal = true;
 
         for (int i = 0; i < PatternStrings.size(); i++)
@@ -56,40 +69,46 @@ public class Model_Validation {
             pattern = Pattern.compile(PatternStrings.get(i));
             match = pattern.matcher(TextViewStrings.get(i)).matches();
             if (!match) {
-                FieldResults.add(false);
+                Boolean tempbool = new Boolean(false);
+                FieldResults.add(tempbool);
                 isVal = false;
             }
             else {
-                FieldResults.add(true);
+                Boolean tempbool = new Boolean(true);
+                FieldResults.add(tempbool);
             }
         }
+        setFailResuls();
 
-        if (!isVal)
-        {
-            Error = getFailResuls();
-        }
-        return isVal;
+         return isVal;
     }
-
-    public String getFailResuls()
+//--------------------------------------------------------------------------------------------------
+    private void setFailResuls()
     {
-        String ErrorMsg = "Feild Results: \n";
+        Log.d(TAG, "setFailResuls: STARTED");
+         errormsg = "Field Results: \n";
 
         for (int i = 0; i< FieldNamesStrings.size(); i++)
         {
-            if (FieldResults.get(i))
+            if (FieldResults.get(i).booleanValue())
             {
-                ErrorMsg += "SUCCESS!";
+                errormsg += "SUCCESS: " + FieldNamesStrings.get(i);
                 continue;
             }
             else
             {
-                ErrorMsg += "\t Invalid: " + FieldNamesStrings.get(i);
+                errormsg += "\t Invalid: " + FieldNamesStrings.get(i);
             }
         }
-        return ErrorMsg;
     }
-    public boolean isMatch() {
+
+    public String getErrormsg()
+    {
+        Log.d(TAG, "getErrormsg: STARTED");
+        return this.errormsg;
+    }
+    private boolean isMatch() {
         return match;
     }
+
 }

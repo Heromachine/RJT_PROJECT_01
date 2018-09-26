@@ -9,10 +9,12 @@
         >
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_productlist_recyclerview"
+            android:id="@+id/rv_categorylist_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#041" />
+            android:background="#941"
+        />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

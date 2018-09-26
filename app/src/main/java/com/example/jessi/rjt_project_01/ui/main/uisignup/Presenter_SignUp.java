@@ -42,7 +42,7 @@ public class Presenter_SignUp implements IPresenter_SignUp {
         Log.d(TAG, "iPresenter_OnButtonClicked: ");
         switch(view.getId())
         {
-            case R.id.btn_login:
+            case R.id.btn_su_login:
 
 //                this.MVS.addTextViewString(view.findViewById(R.id.etx_su_username).toString());
 //                this.MVS.addTextViewString(view.findViewById(R.id.etx_su_password).toString());

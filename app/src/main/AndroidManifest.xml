@@ -13,18 +13,13 @@
         android:name=".AppController"
         android:theme="@style/AppTheme">
 
-        <!--
-        activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity
-        -->
+        activity
+        <activity android:name=".ui.main.main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
 
 
         <!-- SIGNUP ACTIVITY-->
@@ -33,21 +28,27 @@
         </activity>
 
         <!-- LOGIN ACTIVITY-->
-        <activity android:name=".ui.main.uilogin.View_Login"
-
+        <activity android:name=".ui.main.uilogin.ViewLoginMainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>></activity>
+            </intent-filter>
+
+            ></activity>
+
+
 
         <!-- PRODUCT LIST ACTIVITY-->
-        <activity android:name=".ui.main.uiproductlist.View_MainActivity_ProductList" ></activity>
+        <activity android:name=".ui.main.uiproductlist.ViewMainActivityProductList">
+        </activity>
 
         <!-- CATEGORIES ACTIVITY-->
-        <activity android:name=".ui.main.uicategories.View_Categories"></activity>
+        <activity android:name=".ui.main.uicategories.View_Categories"
+
+            ></activity>
 
     </application>
 

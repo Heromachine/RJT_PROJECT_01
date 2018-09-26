@@ -18,9 +18,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecycleView_Adapter_Product extends RecyclerView.Adapter <RecycleView_Adapter_Product.viewHolder>{
+public class RecycleView_Adapter_Product extends RecyclerView.Adapter <RecycleView_Adapter_Product.ViewHolder>{
+
     private static final String TAG = "RecycleView_Adapter_Pro";
-    TextView tv;
     private Context mCtx;
     private List<Model_Product> listViewListItem;
 
@@ -29,18 +29,7 @@ public class RecycleView_Adapter_Product extends RecyclerView.Adapter <RecycleVi
         this.mCtx = mCtx;
         this.listViewListItem = listViewListItem;
     }
-
-    @NonNull
-    @Override
-    public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Log.d(TAG, "onCreateViewHolder: ");
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-
-        View view = inflater.inflate(R.layout.view_product_list_listview, null);
-        viewHolder holder = new viewHolder(view);
-        return holder;
-    }
-    public class viewHolder extends RecyclerView.ViewHolder
+    public class ViewHolder extends RecyclerView.ViewHolder
     {
         private static final String TAG = "viewHolder";
         TextView id;
@@ -48,7 +37,7 @@ public class RecycleView_Adapter_Product extends RecyclerView.Adapter <RecycleVi
         TextView description;
         ImageView image;
 
-        public viewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
             Log.d(TAG, "viewHolder: ");
@@ -58,15 +47,27 @@ public class RecycleView_Adapter_Product extends RecyclerView.Adapter <RecycleVi
             image = itemView.findViewById(R.id.img_item);
         }
     }
-    @Override
-    public void onBindViewHolder(@NonNull viewHolder viewHolder, int i) {
-        Log.d(TAG, "onBindViewHolder: ");
-        Model_Product vli = listViewListItem.get(i);
 
-        viewHolder.id.setText(vli.getId());
-        viewHolder.name.setText(vli.getName());
-        viewHolder.description.setText(vli.getDescription());
-        Picasso.get().load(vli.getUrl()).into(viewHolder.image);
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        Log.d(TAG, "onCreateViewHolder: ");
+        LayoutInflater inflater = LayoutInflater.from(mCtx);
+
+        View view = inflater.inflate(R.layout.view_productlist_item, viewGroup, false);
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
+    }
+
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Log.d(TAG, "onBindViewHolder: ");
+        Model_Product modelProduct = listViewListItem.get(i);
+        viewHolder.id.setText(modelProduct.getId());
+        viewHolder.name.setText(modelProduct.getName());
+        viewHolder.description.setText(modelProduct.getDescription());
+        Picasso.get().load(modelProduct.getUrl()).into(viewHolder.image);
     }
 
     @Override

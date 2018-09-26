@@ -15,33 +15,27 @@ import com.example.jessi.rjt_project_01.R;
 import com.example.jessi.rjt_project_01.data.models.CustomProductlistAdapter;
 import com.example.jessi.rjt_project_01.data.models.Model_Product;
 
-public class View_MainActivity_ProductList extends AppCompatActivity implements IView_ProductList{
+import java.util.ArrayList;
+import java.util.List;
+
+public class ViewMainActivityProductList extends AppCompatActivity implements IViewProductList {
 
     private static final String TAG = "VIEW_MY_PRODUCT";
 
-    IPresenter_ProductList iPresenter_productList;
-    TextView ID;
-    TextView Name;
-    TextView Description;
-    Model_Product mProd = new Model_Product();
-
-
+    IPresenterProductList iPresenter_productList;
     RecyclerView recyclerView;
-    RecycleView_Adapter_Product LVA;
-    CustomProductlistAdapter CPA;
+    RecycleView_Adapter_Product recyclerViewAdapterProduct;
+    private List<Model_Product> listModel_Product;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.view_productlist_recycleview);
+        listModel_Product = new ArrayList<>();
         recyclerView = findViewById(R.id.rv_productlist_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        iPresenter_productList = new Presenter_ProductList(View_MainActivity_ProductList.this);
-        LVA = new RecycleView_Adapter_Product(View_MainActivity_ProductList.this, iPresenter_productList.getListModel_Product());
-
-        recyclerView.setAdapter(LVA);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        iPresenter_productList = new Presenter_ProductList(ViewMainActivityProductList.this);
     }
 
     @Override
@@ -50,9 +44,17 @@ public class View_MainActivity_ProductList extends AppCompatActivity implements 
         return super.onCreateView(parent, name, context, attrs);
     }
 
-    public void View_LogIn_clickHandler(View view)
+    public void view_LogIn_clickHandler(View view)
     {
         Log.d(TAG, "View_LogIn_clickHandler: ");
         iPresenter_productList.iPresenter_OnButtonClicked(view, this);
+    }
+
+    @Override
+    public void ViewGetProductList(List Plist)
+    {
+        listModel_Product = Plist;
+        recyclerViewAdapterProduct = new RecycleView_Adapter_Product(ViewMainActivityProductList.this, listModel_Product);
+        recyclerView.setAdapter(recyclerViewAdapterProduct);
     }
 }

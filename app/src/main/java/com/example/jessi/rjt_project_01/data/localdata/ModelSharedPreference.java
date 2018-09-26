@@ -3,7 +3,7 @@ package com.example.jessi.rjt_project_01.data.localdata;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Model_LocalData {
+public class ModelSharedPreference {
     public void createSP(Context context, String viewPreference)
     {
         SharedPreferences SP = context.getSharedPreferences(viewPreference, Context.MODE_PRIVATE);

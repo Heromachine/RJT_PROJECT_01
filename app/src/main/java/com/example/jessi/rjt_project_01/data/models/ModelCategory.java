@@ -1,20 +1,24 @@
 package com.example.jessi.rjt_project_01.data.models;
 
-public class Model_Product {
-    private static final String TAG = "Model_Product";
+public class ModelCategory {
+
+    private static final String TAG = "ModelCategory: STARTED";
+
     private String id;
     private String name;
     private String description;
     private String url;
 
-    public Model_Product(){}
+    public ModelCategory() {
+    }
 
-    public Model_Product(String id, String name, String description, String url) {
+    public ModelCategory(String id, String name, String description, String url) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
     }
+
 
     public String getId() {
         return id;
@@ -47,4 +51,5 @@ public class Model_Product {
     public void setUrl(String url) {
         this.url = url;
     }
+
 }

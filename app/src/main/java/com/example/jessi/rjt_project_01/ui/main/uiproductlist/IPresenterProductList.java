@@ -8,7 +8,7 @@ import com.example.jessi.rjt_project_01.data.models.Model_Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface IPresenter_ProductList {
+public interface IPresenterProductList {
 
     public  void iPresenter_OnButtonClicked(View view, Context context);
 
@@ -16,7 +16,7 @@ public interface IPresenter_ProductList {
 
     public void iPresenter_VolleyItemRequest();
 
-    List<Model_Product> getListModel_Product();
+    List<Model_Product> getListModel_Product(List productList);
 
     public Model_Product getProduct();
 }
