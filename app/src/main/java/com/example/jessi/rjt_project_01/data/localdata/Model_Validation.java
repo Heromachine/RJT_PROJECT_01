@@ -18,6 +18,8 @@ public class Model_Validation {
     boolean match = false;
     private Pattern pattern;
 
+    boolean isVal = true;
+
     ArrayList<String> FieldNamesStrings;
     ArrayList<String> PatternStrings;
     ArrayList<String> TextViewStrings;
@@ -41,6 +43,8 @@ public class Model_Validation {
             FieldNamesStrings.add(fieldnames.get(i));
         }
     }
+
+
 //--------------------------------------------------------------------------------------------------
 
 //    private static final String USERNAME_PATTERN = "^[ A-Za-z0-9._-]{3,15}$";
@@ -62,8 +66,8 @@ public class Model_Validation {
     public boolean validation()
     {
         Log.d(TAG, "validation: STARTED");
-        boolean isVal = true;
 
+        this.isVal = true;
         for (int i = 0; i < PatternStrings.size(); i++)
         {
             pattern = Pattern.compile(PatternStrings.get(i));
@@ -79,6 +83,10 @@ public class Model_Validation {
             }
         }
         setFailResuls();
+
+        //Clear for another attempt
+        TextViewStrings.clear();
+        FieldResults.clear();
 
          return isVal;
     }
@@ -97,7 +105,9 @@ public class Model_Validation {
             }
             else
             {
+
                 errormsg += "\t Invalid: " + FieldNamesStrings.get(i);
+                this.isVal = false;
             }
         }
     }

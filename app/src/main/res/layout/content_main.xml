@@ -8,4 +8,22 @@
     tools:context=".ui.main.main.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <!-- our tablayout to display tabs  -->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/mainTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#6698de"
+        android:minHeight="?attr/actionBarSize"
+        android:minWidth="60dp"
+        app:tabMode="scrollable"
+        app:tabGravity="center"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- View pager to swipe views -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mainpager"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"/>
+
 </android.support.constraint.ConstraintLayout>

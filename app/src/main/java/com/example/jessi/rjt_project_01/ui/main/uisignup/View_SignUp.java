@@ -12,12 +12,13 @@ import com.example.jessi.rjt_project_01.R;
 
 public class View_SignUp extends AppCompatActivity implements IView_SignUp {
 
-    Presenter_SignUp iPresenter;
+    IPresenter_SignUp iPresenterSignUp;
     TextView instructionsError;
 
     EditText firstname;
     EditText lastname;
-    EditText Address;
+    EditText address;
+    EditText password;
     EditText email;
     EditText mobile;
 
@@ -30,13 +31,29 @@ public class View_SignUp extends AppCompatActivity implements IView_SignUp {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_signup);
 
+        iPresenterSignUp = new Presenter_SignUp(this);
+        firstname = findViewById(R.id.etx_su_firstname);
+        lastname  = findViewById(R.id.etx_su_lastname);
+        address   = findViewById(R.id.etx_su_address);
+        password  = findViewById(R.id.etx_su_password);
+        email     = findViewById(R.id.etx_su_email);
+        mobile    = findViewById(R.id.etx_su_mobile);
+
         btnLogin = findViewById(R.id.btn_su_login);
         btnRegister = findViewById(R.id.btn_su_register);
     }
 
     public void View_SignUp_clickHandler(View view)
     {
-       // iPresenter.iPresenter_OnButtonClicked(view, this, userName.getText().toString(), passWord.getText().toString());
+        iPresenterSignUp.iPresenter_OnButtonClicked(
+                view,
+                this,
+                firstname.getText().toString(),
+                lastname.getText().toString(),
+                address.getText().toString(),
+                password.getText().toString(),
+                email.getText().toString(),
+                mobile.getText().toString());
     }
 
     @Override

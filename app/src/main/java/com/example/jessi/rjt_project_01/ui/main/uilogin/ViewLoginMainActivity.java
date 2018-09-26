@@ -1,5 +1,6 @@
 package com.example.jessi.rjt_project_01.ui.main.uilogin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -53,6 +54,8 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
     public void View_LogIn_clickHandler(View view)
     {
         iPresenter.iPresenter_OnButtonClicked(view, this, etPhone.getText().toString(), etPassWord.getText().toString());
+
+
     }
 
 

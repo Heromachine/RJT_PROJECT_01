@@ -1,11 +1,14 @@
 package com.example.jessi.rjt_project_01;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.example.jessi.rjt_project_01.data.localdata.ModelSharedPreference;
 
 public class AppController extends Application {
 
@@ -13,6 +16,10 @@ public class AppController extends Application {
 
     private RequestQueue requestQueue;
     private static AppController mInstance;
+
+    ModelSharedPreference modelSharedPreference;
+
+    Context context;
 
     @Override
     public void onCreate() {
@@ -46,5 +53,15 @@ public class AppController extends Application {
         if(requestQueue != null) {
             requestQueue.cancelAll(tag);
         }
+    }
+
+    public ModelSharedPreference getModelSharedPreference()
+    {
+        return modelSharedPreference;
+    }
+
+    public Context getContext()
+    {
+        return context;
     }
 }

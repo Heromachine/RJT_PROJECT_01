@@ -71,6 +71,7 @@ public class Presenter_Login implements IPresenter_Login {
         switch(view.getId())
         {
             case R.id.btn_li_login:
+
             this.modelValidation.addTextViewString(phone);
             this.modelValidation.addTextViewString(password);
             boolean temp = modelValidation.validation();
@@ -131,6 +132,15 @@ public class Presenter_Login implements IPresenter_Login {
                                     catObject.getString("mobile"),
                                     catObject.getString("appapikey"));
 
+                            AppController.getInstance()
+                                    .getModelSharedPreference()
+                                    .addSP(AppController.getInstance()
+                                            .getContext(),
+                                            "CatObject",
+                                            "appapikey",
+                                            catObject.getString(
+                                                    "appapikey"));
+
                         } catch (JSONException e)
                         {
                             e.printStackTrace();
@@ -164,17 +174,13 @@ public class Presenter_Login implements IPresenter_Login {
 
     @Override
     public void setUserName(String username) {
-
     }
 
     @Override
     public void setPassWord(String password) {
-
     }
 
     @Override
     public void iPresenter_giveViewEditTextString(View view) {
-
     }
-    
 }
