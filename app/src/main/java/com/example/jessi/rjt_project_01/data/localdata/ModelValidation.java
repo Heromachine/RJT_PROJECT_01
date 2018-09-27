@@ -92,6 +92,7 @@ public class ModelValidation {
         TextViewStrings.clear();
         FieldResults.clear();
 
+
          return isVal;
     }
 //--------------------------------------------------------------------------------------------------
@@ -104,15 +105,20 @@ public class ModelValidation {
         {
             if (FieldResults.get(i).booleanValue())
             {
-                errormsg += "SUCCESS: " + FieldNamesStrings.get(i);
+                errormsg += "\n SUCCESS: " + FieldNamesStrings.get(i);
                 continue;
             }
             else
             {
 
-                errormsg += "\t Invalid: " + FieldNamesStrings.get(i);
-                this.isVal = false;
+                errormsg += "\n FAILED: " + FieldNamesStrings.get(i) + ": "+ TextViewStrings.get(i) + "--->Pattern : "  +PatternStrings.get(i) ;
+                //this.isVal = false;
             }
+
+            errormsg += "\n PatternStrings: " + PatternStrings.size();
+            errormsg += "\n FieldNamesStrings: " + FieldNamesStrings.size();
+            errormsg += "\n TextViewStrings: " + TextViewStrings.size();
+            errormsg += "\n FieldResults: " + FieldResults.size();
         }
     }
 

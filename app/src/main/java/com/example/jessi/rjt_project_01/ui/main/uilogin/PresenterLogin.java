@@ -140,16 +140,8 @@ public class PresenterLogin implements IPresenter_Login {
                                     catObject.getString("mobile"),
                                     catObject.getString("appapikey"));
 
-//                            AppController.getInstance()
-//                                    .getModelSharedPreference()
-//                                    .addSP(AppController.getInstance()
-//                                            .getContext(),
-//                                            "credit",
-//                                            "appkey",
-//                                            catObject.getString(
-//                                                    "appapikey"));
 
-                            Intent mIntent = new Intent(mctx, Presenter_ProductList.class);
+                            Intent mIntent = new Intent(mctx, ViewLoginMainActivity.class);
                             Bundle mBundle = new Bundle();
                             mBundle.putString("appkey", catObject.getString("appapikey"));
                             mIntent.putExtras(mBundle);

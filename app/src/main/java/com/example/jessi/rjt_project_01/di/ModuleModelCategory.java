@@ -6,6 +6,8 @@ import android.view.View;
 import com.example.jessi.rjt_project_01.data.models.ModelCategory;
 import com.example.jessi.rjt_project_01.ui.main.uilogin.IViewLogin;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -18,7 +20,7 @@ public class ModuleModelCategory {
         this.context = context;
     }
 
-    @Provides
+    @Provides@Singleton
     public Context getContext()
     {
         return context;
@@ -26,7 +28,7 @@ public class ModuleModelCategory {
 
 
 
-    @Provides
+    @Provides@Singleton
     ModelCategory providesModelCategoryObject()
     {
         return new ModelCategory();

@@ -49,7 +49,14 @@ public class ViewMainActivityProductList extends AppCompatActivity implements IV
     public void view_LogIn_clickHandler(View view)
     {
         Log.d(TAG, "View_LogIn_clickHandler: ");
-        iPresenter_productList.setURL(getExtras());
+        Bundle extras = getIntent().getExtras();
+        String apikey = null;
+
+        if (extras != null) {
+            apikey = extras.getString("appapikey");
+            // and get whatever type user account id is
+        }
+        iPresenter_productList.setURL(apikey);
         iPresenter_productList.iPresenter_OnButtonClicked(view, this);
     }
 

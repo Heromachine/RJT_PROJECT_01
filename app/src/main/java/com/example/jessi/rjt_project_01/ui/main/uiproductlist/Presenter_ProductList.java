@@ -1,6 +1,8 @@
 package com.example.jessi.rjt_project_01.ui.main.uiproductlist;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +24,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class Presenter_ProductList implements IPresenterProductList {
-    private static final String TAG = "PRESENTERPRO";
+    private static final String TAG = "Presenter_ProductList";
 
 
 
@@ -134,10 +136,15 @@ public class Presenter_ProductList implements IPresenterProductList {
     public void setURL(String apikey) {
             this.apiKey = apikey;
     }
+    
+    
     private String getURL()
     {
+
+
+        Log.d(TAG, "getURL: API KEY: "+ AppController.getInstance().getAPIkey());
         return "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key="
-                + AppController.getInstance().getAPIkey()
+                + this.apiKey
                 + "&user_id=1389";
     }
 }

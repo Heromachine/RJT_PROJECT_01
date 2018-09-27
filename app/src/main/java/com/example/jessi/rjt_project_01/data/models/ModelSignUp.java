@@ -8,6 +8,25 @@ public class ModelSignUp {
     private String password;
     private String email;
     private String mobile;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    private boolean registered;
+
+    public boolean isRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.registered = registered;
+    }
 
     public ModelSignUp() {
     }

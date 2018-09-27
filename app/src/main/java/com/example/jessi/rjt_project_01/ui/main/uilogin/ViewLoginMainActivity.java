@@ -29,11 +29,10 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
 
     String logInError;
 
-    @Inject
-    ModuleModelCategory moduleModelCategory;
-    //ModelCategory modelCategory;
-
-    MyComponent myComponent;
+    ModelCategory modelCategory;
+//     @Inject
+//     ModuleModelCategory moduleModelCategory;
+//     MyComponent myComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +41,11 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
 
         iPresenter = new PresenterLogin(this);
 
-       //modelCategory = new ModelCategory();
+        modelCategory = new ModelCategory();
 
-        myComponent = DaggerMyComponent.builder().moduleModelCategory(new ModuleModelCategory(this)).build();
-        //myComponent = DaggerMyComponent.builder().moduleModelCategory(new ModuleModelCategory(this)).build();
-        myComponent.injectViewLoginMainActivity(this);
+//        myComponent = DaggerMyComponent.builder().moduleModelCategory(moduleModelCategory).build();
+//        //myComponent = DaggerMyComponent.builder().moduleModelCategory(new ModuleModelCategory(this)).build();
+//        myComponent.inject(this);
 
         etPhone = findViewById(R.id.et_li_phone);
         etPassWord = findViewById(R.id.et_li_password);
@@ -61,9 +60,9 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
     @Override
     public void getModel(ModelCategory ModCat)
     {
-       // modelCategory = ModCat;
-       // moduleModelCategory = ModCat;
-        myComponent = (MyComponent) ModCat;
+        modelCategory = ModCat;
+//       // moduleModelCategory = ModCat;
+//        myComponent = (MyComponent) ModCat;
 
 
     }
