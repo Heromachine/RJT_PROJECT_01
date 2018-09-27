@@ -19,7 +19,15 @@ public class AppController extends Application {
 
     ModelSharedPreference modelSharedPreference;
 
-    Context context;
+    String APIkey;
+
+    public String getAPIkey() {
+        return APIkey;
+    }
+
+    public void setAPIkey(String APIkey) {
+        this.APIkey = APIkey;
+    }
 
     @Override
     public void onCreate() {
@@ -28,6 +36,8 @@ public class AppController extends Application {
     }
 
     public static synchronized AppController getInstance() {
+
+
         return mInstance;
     }
 
@@ -60,8 +70,4 @@ public class AppController extends Application {
         return modelSharedPreference;
     }
 
-    public Context getContext()
-    {
-        return context;
-    }
 }

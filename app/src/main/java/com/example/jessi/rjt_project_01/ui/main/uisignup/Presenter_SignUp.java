@@ -2,12 +2,11 @@ package com.example.jessi.rjt_project_01.ui.main.uisignup;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.jessi.rjt_project_01.R;
-import com.example.jessi.rjt_project_01.data.localdata.Model_Validation;
+import com.example.jessi.rjt_project_01.data.localdata.ModelValidation;
 import com.example.jessi.rjt_project_01.data.models.ModelSignUp;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 public class Presenter_SignUp implements IPresenter_SignUp {
     private static final String TAG = "Presenter_SignUp";
     private IView_SignUp iViewSignUp;
-    private Model_Validation modelValidation;
+    private ModelValidation modelValidation;
     private ModelSignUp modelSignUp;
 
     private String error;
@@ -49,7 +48,7 @@ public class Presenter_SignUp implements IPresenter_SignUp {
         SIGNINFEILDNAMES.add("Email: ");
         SIGNINFEILDNAMES.add("Mobile Phone: ");
 
-        this.modelValidation = new Model_Validation(SIGNINPATTERNS, SIGNINFEILDNAMES);
+        this.modelValidation = new ModelValidation(SIGNINPATTERNS, SIGNINFEILDNAMES);
 
     }
 

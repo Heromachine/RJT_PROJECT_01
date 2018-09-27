@@ -19,8 +19,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class Presenter_ProductList implements IPresenterProductList {
     private static final String TAG = "PRESENTERPRO";
+
+
+
 
     //VIEW RESOURCES
     private IViewProductList iViewMainActivityProductList;
@@ -33,7 +38,11 @@ public class Presenter_ProductList implements IPresenterProductList {
     RecyclerView recyclerView;
     private RecycleView_Adapter_Product recycleViewAdapterProduct;
 
+    String apiKey;
+
     ///////////////////////////////////////
+
+    Context cntx;
 
     //INIT THIS PRESENTER WITH----------------------------------------------------------------------
     public Presenter_ProductList(ViewMainActivityProductList mainActivity)
@@ -41,16 +50,18 @@ public class Presenter_ProductList implements IPresenterProductList {
         iViewMainActivityProductList = new ViewMainActivityProductList();
         iViewMainActivityProductList = mainActivity;
         iPresenter_VolleyItemRequest();
+
+        cntx = mainActivity;
     }
 
     @Override
     public void iPresenter_VolleyItemRequest() {
 
-        Log.d(TAG, "iPresenter_VolleyItemRequest: ");
+        Log.d(TAG, "iPresenter_VolleyItemRequest: " + getURL());
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
-                ossomURL,
+                getURL(),
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -73,10 +84,14 @@ public class Presenter_ProductList implements IPresenterProductList {
 
                                 //ADD MODEL(modelp) INTO A LIST
 
+
+                                Log.d(TAG, "onResponse: "+listModel_Product.size());
                                 listModel_Product.add(modelp);
+                                Log.d(TAG, "onResponse: =================================="+listModel_Product.size());
                                 iViewMainActivityProductList.ViewGetProductList(listModel_Product);
                             }
                         } catch (JSONException e) {
+                            Log.d(TAG, "onResponse: =======================================ERROR");
                             e.printStackTrace();
                         }
                     }
@@ -115,7 +130,14 @@ public class Presenter_ProductList implements IPresenterProductList {
         return null;
     }
 
-
-
-
+    @Override
+    public void setURL(String apikey) {
+            this.apiKey = apikey;
+    }
+    private String getURL()
+    {
+        return "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key="
+                + AppController.getInstance().getAPIkey()
+                + "&user_id=1389";
+    }
 }

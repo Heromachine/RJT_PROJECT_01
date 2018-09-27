@@ -1,5 +1,6 @@
 package com.example.jessi.rjt_project_01.ui.main.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.jessi.rjt_project_01.R;
+import com.example.jessi.rjt_project_01.ui.main.uicategories.View_Categories;
+import com.example.jessi.rjt_project_01.ui.main.uiproductlist.ViewMainActivityProductList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, TabLayout.OnTabSelectedListener, IMainActivity{
@@ -141,9 +144,12 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.groupcategory) {
+            Intent i = new Intent(this, View_Categories.class);
+            this.startActivity(i);
+        } else if (id == R.id.nav_productlist) {
+            Intent i = new Intent(this, ViewMainActivityProductList.class);
+            this.startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
 

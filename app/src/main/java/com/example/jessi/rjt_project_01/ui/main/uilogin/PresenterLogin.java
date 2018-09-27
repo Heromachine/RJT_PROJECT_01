@@ -2,6 +2,7 @@ package com.example.jessi.rjt_project_01.ui.main.uilogin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -14,9 +15,10 @@ import com.example.jessi.rjt_project_01.AppController;
 import com.example.jessi.rjt_project_01.ui.main.main.MainActivity;
 import com.example.jessi.rjt_project_01.R;
 import com.example.jessi.rjt_project_01.data.localdata.ModelSharedPreference;
-import com.example.jessi.rjt_project_01.data.localdata.Model_Validation;
+import com.example.jessi.rjt_project_01.data.localdata.ModelValidation;
 import com.example.jessi.rjt_project_01.data.models.ModelCategory;
 import com.example.jessi.rjt_project_01.data.models.ModelLogIn;
+import com.example.jessi.rjt_project_01.ui.main.uiproductlist.Presenter_ProductList;
 import com.example.jessi.rjt_project_01.ui.main.uisignup.View_SignUp;
 
 import org.json.JSONArray;
@@ -25,26 +27,32 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Presenter_Login implements IPresenter_Login {
+import javax.inject.Inject;
 
-    private static final String TAG = "Presenter_Login";
+public class PresenterLogin implements IPresenter_Login {
+
+    private static final String TAG = "PresenterLogin";
     private String phone;
     private String password;
     private IViewLogin iViewLogin;
-    private Model_Validation modelValidation;
     private ModelSharedPreference modelLocalData;
     private ModelCategory modelCategory;
     static String error;
-
+    private Context mctx;
     private final ArrayList<String> LOGINPATTERNS = new ArrayList<String>();
     private final ArrayList<String>  LOGINFEILDNAMES = new ArrayList<String>();
 
+    //---------------------------------------
+    ModelValidation modelValidation;
+    //---------------------------------------
+
     String tempURL = "http://rjtmobile.com/aamir/e-commerce/android-app/shop_login.php?mobile=5129094836&password=12345apple";
 
-    public Presenter_Login(ViewLoginMainActivity mainActivity) {
+    public PresenterLogin(ViewLoginMainActivity mainActivity) {
 
         iViewLogin = new ViewLoginMainActivity();
         iViewLogin = mainActivity;
+        mctx = mainActivity;
 
         modelLocalData = new ModelSharedPreference();
         modelLocalData.createSP(mainActivity, "LogInSP");
@@ -58,7 +66,7 @@ public class Presenter_Login implements IPresenter_Login {
         LOGINPATTERNS.add("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
         LOGINFEILDNAMES.add("Phone:");
         LOGINFEILDNAMES.add("Password:");
-        this.modelValidation = new Model_Validation(LOGINPATTERNS, LOGINFEILDNAMES);
+        this.modelValidation = new ModelValidation(LOGINPATTERNS, LOGINFEILDNAMES);
     }
 
 
@@ -132,22 +140,30 @@ public class Presenter_Login implements IPresenter_Login {
                                     catObject.getString("mobile"),
                                     catObject.getString("appapikey"));
 
-                            AppController.getInstance()
-                                    .getModelSharedPreference()
-                                    .addSP(AppController.getInstance()
-                                            .getContext(),
-                                            "CatObject",
-                                            "appapikey",
-                                            catObject.getString(
-                                                    "appapikey"));
+//                            AppController.getInstance()
+//                                    .getModelSharedPreference()
+//                                    .addSP(AppController.getInstance()
+//                                            .getContext(),
+//                                            "credit",
+//                                            "appkey",
+//                                            catObject.getString(
+//                                                    "appapikey"));
+
+                            Intent mIntent = new Intent(mctx, Presenter_ProductList.class);
+                            Bundle mBundle = new Bundle();
+                            mBundle.putString("appkey", catObject.getString("appapikey"));
+                            mIntent.putExtras(mBundle);
+
+                            AppController.getInstance().setAPIkey(catObject.getString("appapikey"));
+
+
 
                         } catch (JSONException e)
                         {
+                            Log.d(TAG, "onResponse: ERROR IN LOGIN JSON");
                             e.printStackTrace();
                         }
 
-
-                        Log.d(TAG, "onResponse: " + response.toString());
                     }
 //
 

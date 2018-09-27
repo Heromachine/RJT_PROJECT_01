@@ -36,6 +36,8 @@ public class ViewMainActivityProductList extends AppCompatActivity implements IV
         recyclerView = findViewById(R.id.rv_productlist_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         iPresenter_productList = new Presenter_ProductList(ViewMainActivityProductList.this);
+
+
     }
 
     @Override
@@ -47,7 +49,13 @@ public class ViewMainActivityProductList extends AppCompatActivity implements IV
     public void view_LogIn_clickHandler(View view)
     {
         Log.d(TAG, "View_LogIn_clickHandler: ");
+        iPresenter_productList.setURL(getExtras());
         iPresenter_productList.iPresenter_OnButtonClicked(view, this);
+    }
+
+    public String getExtras()
+    {
+        return getIntent().getExtras().getString("appkey");
     }
 
     @Override

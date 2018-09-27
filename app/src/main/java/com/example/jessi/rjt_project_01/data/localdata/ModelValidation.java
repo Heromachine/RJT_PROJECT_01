@@ -5,12 +5,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-public class Model_Validation {
+
+public class ModelValidation {
 
     private static final String TAG = "Model_ValSTARTED";
 //--------------------------------------------------------------------------------------------------
 
-    public Model_Validation() {
+    public ModelValidation() {
     }
 
 //--------------------------------------------------------------------------------------------------
@@ -30,9 +31,9 @@ public class Model_Validation {
     int index = 0;
 
 //--------------------------------------------------------------------------------------------------
-    public Model_Validation(final ArrayList<String> patterns, ArrayList<String> fieldnames)
+    public ModelValidation(final ArrayList<String> patterns, ArrayList<String> fieldnames)
     {
-        Log.d(TAG, "Model_Validation: STARTED");
+        Log.d(TAG, "ModelValidation: STARTED");
 
         PatternStrings = patterns;
         TextViewStrings = new ArrayList<>();
@@ -52,16 +53,19 @@ public class Model_Validation {
 //    private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._-]{3,20}@[a-zA-Z0-9]{3,9}.com$";
 //    private static final String DOB_PATTERN = "^(\\d{2}-?\\d{2}-?\\d{4})$";
 //--------------------------------------------------------------------------------------------------
+
     public void addPatternString(final String input)
     {
         PatternStrings.add(input);
     }
 //--------------------------------------------------------------------------------------------------
+
     public void addTextViewString(String input)
     {
         TextViewStrings.add(input);
     }
 //--------------------------------------------------------------------------------------------------
+
 
     public boolean validation()
     {

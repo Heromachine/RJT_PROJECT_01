@@ -1,17 +1,22 @@
 package com.example.jessi.rjt_project_01.ui.main.uilogin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.jessi.rjt_project_01.R;
 import com.example.jessi.rjt_project_01.data.models.ModelCategory;
 
-import java.util.List;
+
+import com.example.jessi.rjt_project_01.di.DaggerMyComponent;
+import com.example.jessi.rjt_project_01.di.ModuleModelCategory;
+import com.example.jessi.rjt_project_01.di.MyComponent;
+
+import javax.inject.Inject;
+
+import dagger.internal.DaggerCollections;
 
 public class ViewLoginMainActivity extends AppCompatActivity implements IViewLogin {
 
@@ -24,16 +29,24 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
 
     String logInError;
 
-    ModelCategory modelCategory;
+    @Inject
+    ModuleModelCategory moduleModelCategory;
+    //ModelCategory modelCategory;
+
+    MyComponent myComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_login);
 
-        iPresenter = new Presenter_Login(this);
+        iPresenter = new PresenterLogin(this);
 
-        modelCategory = new ModelCategory();
+       //modelCategory = new ModelCategory();
+
+        myComponent = DaggerMyComponent.builder().moduleModelCategory(new ModuleModelCategory(this)).build();
+        //myComponent = DaggerMyComponent.builder().moduleModelCategory(new ModuleModelCategory(this)).build();
+        myComponent.injectViewLoginMainActivity(this);
 
         etPhone = findViewById(R.id.et_li_phone);
         etPassWord = findViewById(R.id.et_li_password);
@@ -48,7 +61,10 @@ public class ViewLoginMainActivity extends AppCompatActivity implements IViewLog
     @Override
     public void getModel(ModelCategory ModCat)
     {
-        modelCategory = ModCat;
+       // modelCategory = ModCat;
+       // moduleModelCategory = ModCat;
+        myComponent = (MyComponent) ModCat;
+
 
     }
     public void View_LogIn_clickHandler(View view)

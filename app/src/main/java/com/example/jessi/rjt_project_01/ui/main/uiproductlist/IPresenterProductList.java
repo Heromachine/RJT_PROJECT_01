@@ -19,4 +19,6 @@ public interface IPresenterProductList {
     List<Model_Product> getListModel_Product(List productList);
 
     public Model_Product getProduct();
+
+    void setURL(String apikey);
 }
