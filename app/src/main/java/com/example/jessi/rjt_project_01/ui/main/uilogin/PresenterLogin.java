@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.jessi.rjt_project_01.AppController;
+import com.example.jessi.rjt_project_01.SharedPref;
 import com.example.jessi.rjt_project_01.ui.main.main.MainActivity;
 import com.example.jessi.rjt_project_01.R;
 import com.example.jessi.rjt_project_01.data.localdata.ModelSharedPreference;
@@ -42,6 +43,7 @@ public class PresenterLogin implements IPresenter_Login {
     private final ArrayList<String> LOGINPATTERNS = new ArrayList<String>();
     private final ArrayList<String>  LOGINFEILDNAMES = new ArrayList<String>();
 
+    ModelLogIn modelLogIn;
     //---------------------------------------
     ModelValidation modelValidation;
     //---------------------------------------
@@ -105,6 +107,8 @@ public class PresenterLogin implements IPresenter_Login {
             case R.id.btn_li_go_to_signup:
                 Intent i = new Intent(context, View_SignUp.class);
                 context.startActivity(i);
+
+                 this.modelLogIn.getAppapikey();
                 break;
         }
     }
@@ -127,9 +131,10 @@ public class PresenterLogin implements IPresenter_Login {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        Log.d(TAG, "onResponse: RESPONSE ");
                         try
                         {
-
+                            Log.d(TAG, "onResponse: TRY **************************");
                             JSONObject catObject = response.getJSONObject(0);
                             ModelLogIn modelLogIn = new ModelLogIn(
                                     catObject.getString("msg"),
@@ -140,19 +145,24 @@ public class PresenterLogin implements IPresenter_Login {
                                     catObject.getString("mobile"),
                                     catObject.getString("appapikey"));
 
+                            Log.d(TAG, "onResponse: modelLogIn: "+modelLogIn.getAppapikey());
+                            setModelLogin(modelLogIn);
+//                            Intent mIntent = new Intent(mctx, ViewLoginMainActivity.class);
+//                            Bundle mBundle = new Bundle();
+//                            mBundle.putString("appkey", catObject.getString("appapikey"));
+//                            mIntent.putExtras(mBundle);
 
-                            Intent mIntent = new Intent(mctx, ViewLoginMainActivity.class);
-                            Bundle mBundle = new Bundle();
-                            mBundle.putString("appkey", catObject.getString("appapikey"));
-                            mIntent.putExtras(mBundle);
-
-                            AppController.getInstance().setAPIkey(catObject.getString("appapikey"));
+                            SharedPref.init(mctx);
+                            SharedPref.write(SharedPref.API_KEY, modelLogIn.getAppapikey());
+                            Log.d(TAG, "onResponse: api: " + SharedPref.read(SharedPref.API_KEY, null));
+                            SharedPref.write(SharedPref.ID, modelLogIn.getId());
+                            //AppController.getInstance().setAPIkey(catObject.getString("appapikey"));
 
 
 
                         } catch (JSONException e)
                         {
-                            Log.d(TAG, "onResponse: ERROR IN LOGIN JSON");
+                            Log.d(TAG, "onResponse: ERROR IN LOGIN JSON" + e.getMessage());
                             e.printStackTrace();
                         }
 
@@ -170,6 +180,10 @@ public class PresenterLogin implements IPresenter_Login {
         AppController.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 
+
+
+    public void setModelLogin(ModelLogIn modelLogin)
+    {this.modelLogIn = modelLogin;}
     @Override
     public String returnUsername() {
         return null;

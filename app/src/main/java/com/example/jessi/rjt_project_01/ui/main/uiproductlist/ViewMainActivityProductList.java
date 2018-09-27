@@ -35,7 +35,7 @@ public class ViewMainActivityProductList extends AppCompatActivity implements IV
         listModel_Product = new ArrayList<>();
         recyclerView = findViewById(R.id.rv_productlist_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        iPresenter_productList = new Presenter_ProductList(ViewMainActivityProductList.this);
+        iPresenter_productList = new Presenter_ProductList(this);
 
 
     }

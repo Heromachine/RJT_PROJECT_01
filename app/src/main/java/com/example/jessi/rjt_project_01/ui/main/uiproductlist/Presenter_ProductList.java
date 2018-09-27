@@ -12,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.jessi.rjt_project_01.AppController;
+import com.example.jessi.rjt_project_01.SharedPref;
 import com.example.jessi.rjt_project_01.data.models.Model_Product;
 
 import org.json.JSONArray;
@@ -53,7 +54,8 @@ public class Presenter_ProductList implements IPresenterProductList {
         iViewMainActivityProductList = mainActivity;
         iPresenter_VolleyItemRequest();
 
-        cntx = mainActivity;
+        cntx = mainActivity.getApplicationContext();
+
     }
 
     @Override
@@ -140,11 +142,15 @@ public class Presenter_ProductList implements IPresenterProductList {
     
     private String getURL()
     {
+        SharedPref.init(cntx);
+        String api = SharedPref.read(SharedPref.API_KEY, null);
+        Log.d(TAG, "getURL: API : "+ api);
 
+        String id = SharedPref.read(SharedPref.ID, null);
 
         Log.d(TAG, "getURL: API KEY: "+ AppController.getInstance().getAPIkey());
         return "http://rjtmobile.com/ansari/shopingcart/androidapp/cust_category.php?api_key="
-                + this.apiKey
-                + "&user_id=1389";
+                + api
+                + "&user_id="+id;
     }
 }
